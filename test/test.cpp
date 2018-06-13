@@ -1,4 +1,4 @@
-#include "interfaces/Test"
+#include "interfaces/STest"
 
 TEST(all, doNothing) {
 

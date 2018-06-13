@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 include(../utils.cmake)
 
-project(Test)
+project(STest)
 # Add install target for interface.
-add_install_header(include/interfaces/Test)
+add_install_header(include/interfaces/STest)
 # Add test executable
 add_executable(test0 test/test.cpp ${interface_file})
 target_link_libraries(test0 -flto)
