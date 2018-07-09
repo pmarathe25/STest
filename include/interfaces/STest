@@ -1,1 +1,2 @@
-#include "/home/pranav/C++/Stealth/STest/include/STest.hpp"
+#include "/home/pranav/C++/Stealth/STest/include/core.hpp"
+#include "/home/pranav/C++/Stealth/STest/include/runner.hpp"

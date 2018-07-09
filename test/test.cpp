@@ -1,13 +1,14 @@
 #include "interfaces/STest"
 
-TEST(all, doNothing) {
+STEST(all, doNothing) {
 
 }
 
-TEST(all, doNothingAgain) {
+STEST(all, doNothingAgain) {
 
 }
 
 int main() {
-    Stealth::Test::runTests();
+    namespace st = Stealth::Test;
+    st::runTests();
 }
