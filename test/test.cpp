@@ -8,7 +8,4 @@ STEST(all, doNothingAgain) {
 
 }
 
-int main() {
-    namespace st = Stealth::Test;
-    st::runTests();
-}
+RUN_TESTS
