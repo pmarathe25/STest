@@ -1,10 +1,18 @@
 #include "interfaces/STest"
 
-STEST(all, doNothing) {
+STEST(all_doNothing) {
 
 }
 
-STEST(all, doNothingAgain) {
+STEST(all_doNothingAgain) {
+
+}
+
+STEST(all0_doNothing) {
+
+}
+
+STEST(al0_doNothingAgain) {
 
 }
 

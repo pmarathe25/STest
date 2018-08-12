@@ -6,31 +6,37 @@
 #include <map>
 
 namespace Stealth::Test {
+    void log(const std::string& message) {
+        std::cerr << message << std::endl;
+    }
+
     using TestFunc = std::function<void(void)>;
 
-    struct Subtest {
-        Subtest(TestFunc func, std::string name) : func{std::move(func)}, name{std::move(name)} { }
+    struct Test {
+        Test(TestFunc func = {}) : func{std::move(func)} { }
         void operator()() const { func(); }
         const TestFunc func;
-        const std::string name;
     };
 
-    // A single test has many subtests.
-    using Test = std::vector<Subtest>;
     // Keep track of all tests.
-    static std::map<const std::string, Test> tests{};
+    std::map<const std::string, Test> tests{};
 
-    inline bool addTest(TestFunc func, const std::string& testName, std::string testCaseName) {
-        tests[testName].emplace_back(std::move(func), std::move(testCaseName));
+    // Must have a return type so that we can invoke this in the global scope.
+    // The side-effect of this function is to register the test.
+    inline bool addTest(TestFunc func, const std::string& name) {
+        tests.emplace(name, std::move(func));
         return false;
     }
 
-    #define SUBTEST_NAME(TEST, SUBTEST) TEST##_##SUBTEST
     // Tests
-    #define STEST(TEST, SUBTEST) \
-        void SUBTEST_NAME(TEST, SUBTEST)(); \
+    #define STEST(NAME) \
+        void NAME(); \
         namespace Stealth::Test { \
-            [[maybe_unused]] static const bool _ST_Func_Result_##TEST##_##SUBTEST##_##discard = Stealth::Test::addTest(SUBTEST_NAME(TEST, SUBTEST), #TEST, #SUBTEST); \
+            [[maybe_unused]] const bool _ST_Func_Result_##NAME##_##discard = Stealth::Test::addTest(NAME, #NAME); \
         } \
-        void SUBTEST_NAME(TEST, SUBTEST)()
+        void NAME()
+
+    // Asserts and Expects
+    #define EXPECT_TRUE(CONDITION, MESSAGE) if (not (CONDITION)) log(#MESSAGE)
+    #define ASSERT_TRUE(CONDITION, MESSAGE) if (not (CONDITION)) log(#MESSAGE); return;
 } /* Stealth::Test */

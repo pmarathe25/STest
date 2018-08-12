@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/test0.dir/test/test.cpp.o  -o test0 -flto 
+/usr/bin/c++  -flto -fno-fat-lto-objects   CMakeFiles/test0.dir/test/test.cpp.o  -o test0 -flto 

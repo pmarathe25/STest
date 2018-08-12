@@ -4,24 +4,21 @@
 
 namespace Stealth::Test {
     using DisplayTest = std::function<void(const std::string&)>;
-    using RunSubtest = std::function<void(const Subtest&)>;
+    using RunTest = std::function<void(const Test&)>;
 
     // Default behavior is to print test name and then run it.
-    const DisplayTest displayTestDefault = [] (const std::string& testName) {
-        std::cout << "Running Test: " << testName << std::endl;
+    const DisplayTest displayDefault = [] (const std::string& name) {
+        std::cout << "Running Test: " << name << std::endl;
     };
 
-    const RunSubtest runSubtestDefault = [] (const Subtest& subtest) {
-        std::cout << "\tRunning Subtest: " << subtest.name << std::endl;
-        subtest();
+    const RunTest runDefault = [] (const Test& test) {
+        test();
     };
 
-    inline void runTests(const RunSubtest& runSubtest = runSubtestDefault, const DisplayTest& displayTest = displayTestDefault) {
-        for (const auto& [test, subtests] : tests) {
-            displayTest(test);
-            for (const auto& subtest : subtests) {
-                runSubtest(subtest);
-            }
+    inline void runTests(const RunTest& run = runDefault, const DisplayTest& display = displayDefault) {
+        for (const auto& [name, test] : tests) {
+            display(name);
+            run(test);
         }
     }
 
