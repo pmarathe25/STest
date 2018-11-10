@@ -1,8 +1,0 @@
-/home/pranav/C++/Stealth/STest/build/CMakeFiles/install/strip.dir
-/home/pranav/C++/Stealth/STest/build/CMakeFiles/install/local.dir
-/home/pranav/C++/Stealth/STest/build/CMakeFiles/test.dir
-/home/pranav/C++/Stealth/STest/build/CMakeFiles/test0.dir
-/home/pranav/C++/Stealth/STest/build/CMakeFiles/list_install_components.dir
-/home/pranav/C++/Stealth/STest/build/CMakeFiles/edit_cache.dir
-/home/pranav/C++/Stealth/STest/build/CMakeFiles/rebuild_cache.dir
-/home/pranav/C++/Stealth/STest/build/CMakeFiles/install.dir
