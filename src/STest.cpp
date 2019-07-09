@@ -8,7 +8,7 @@
 
 namespace Stealth::Test {
     // Keep track of all tests.
-    std::map<const std::string, const TestFunc> G_TESTS{};
+    static std::map<const std::string, const TestFunc> G_TESTS{};
 
     // Must have a return type so that we can invoke this in the global scope.
     // The side-effect of this function is to register the test.
