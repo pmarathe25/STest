@@ -9,17 +9,30 @@ namespace Stealth::Test {
     // Tests
     #define STEST(NAME) \
         void NAME(bool& __stest_passed); \
-        namespace Stealth::Test { \
-            [[maybe_unused]] const bool _ST_Func_Result_##NAME##_##discard = Stealth::Test::addTest(NAME, #NAME); \
+        namespace { \
+            [[maybe_unused]] const bool _ST_Func_Result_##NAME##_##discard = Stealth::Test::addTest(NAME, __FILE__ ":" #NAME); \
         } \
         void NAME(bool& __stest_passed)
+
+    // Fixtures
+    #define STEST_F(FIXTURE_CLASS, NAME) \
+        namespace { \
+            class _stest_derived_##FIXTURE_CLASS##_##NAME##_class : public FIXTURE_CLASS { \
+            public: \
+                void __stest_run_func(bool& __stest_passed); \
+            } _stest_derived_##FIXTURE_CLASS##_##NAME##_instance; \
+            [[maybe_unused]] const bool _ST_Func_Result_##NAME##_##discard = Stealth::Test::addTest( \
+                std::bind(&_stest_derived_##FIXTURE_CLASS##_##NAME##_class::__stest_run_func, \
+                    &_stest_derived_##FIXTURE_CLASS##_##NAME##_instance, std::placeholders::_1), __FILE__ ":" #NAME); \
+        } \
+        void ::_stest_derived_##FIXTURE_CLASS##_##NAME##_class::__stest_run_func(bool& __stest_passed)
 
     // Checks
     #define LOG_MISMATCH(EXPECTED, VALUE) std::cerr << "\033[1;31m[     ERROR]\n\tAt " << __FILE__ << ":" << __LINE__ << ", " << "Value of: " << #VALUE << "\n\t  Actual: " << (VALUE) << "\n\tExpected: " << (EXPECTED) << "\033[0m" << std::endl;
 
-    #define EXPECT_EQ(EXPECTED, VALUE) if (EXPECTED != VALUE) { LOG_MISMATCH(EXPECTED, VALUE); __stest_passed = false; }
-    #define EXPECT_TRUE(CONDITION) EXPECT_EQ(true, CONDITION)
-    #define EXPECT_FALSE(CONDITION) EXPECT_EQ(false, CONDITION)
+    #define EXPECT_EQ(VALUE, EXPECTED) if (EXPECTED != VALUE) { LOG_MISMATCH(EXPECTED, VALUE); __stest_passed = false; }
+    #define EXPECT_TRUE(CONDITION) EXPECT_EQ(CONDITION, true)
+    #define EXPECT_FALSE(CONDITION) EXPECT_EQ(CONDITION, false)
 
     // Running tests
     enum class Status : int {
