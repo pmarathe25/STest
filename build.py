@@ -6,5 +6,7 @@ libstest = project.library("stest", sources=["STest.cpp"], libs=["stdc++"])
 project.install(libstest, "/usr/local/lib")
 project.install("STest.hpp", "/usr/local/include/Stealth")
 
-project.test("macros", sources=["main.cpp", "macros.cpp", "fixtures.cpp"], libs=["stdc++", libstest])
+for source in glob.iglob("tests/*.cpp"):
+    project.test(source.split('.')[0], sources=[source], libs=["stdc++", libstest])
+
 sbuildr.cli(project, default_profiles=["debug"])
