@@ -1,6 +1,9 @@
 # STest Changelog
 Dates are in YYYY-MM-DD format.
 
+## vNext ()
+- Adds `EXPECT_THROWS` and `EXPECT_THROWS_ANY` to check for exceptions.
+
 ## v0.1.1 (2019-07-10)
 - Adds header include guard
 - Refactors tests into multiple separate tests visible to SBuildr.
