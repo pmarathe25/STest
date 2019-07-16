@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import sbuildr
 import glob
-project = sbuildr.Project(version="0.1.1")
+project = sbuildr.Project()
 
 libstest = project.library("stest", sources=["STest.cpp"], libs=["stdc++"])
 project.install(libstest, "/usr/local/lib")

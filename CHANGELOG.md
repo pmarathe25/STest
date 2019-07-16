@@ -1,7 +1,7 @@
 # STest Changelog
 Dates are in YYYY-MM-DD format.
 
-## vNext ()
+## v0.2.0 (2019-07-15)
 - Adds `EXPECT_THROWS` and `EXPECT_THROWS_ANY` to check for exceptions.
 
 ## v0.1.1 (2019-07-10)
