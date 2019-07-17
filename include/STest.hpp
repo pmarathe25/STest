@@ -1,4 +1,5 @@
 #pragma once
+#include <Stealth/SLog.hpp>
 #include <functional>
 #include <iostream>
 #include <typeinfo>

@@ -42,6 +42,14 @@ STEST(FailExpectThrowsAny) {
     EXPECT_THROWS_ANY(0);
 }
 
+STEST(PassCanCompareTypeIDs) {
+    EXPECT_EQ(typeid(0), typeid(0));
+}
+
+STEST(FailCanCompareTypeIDs) {
+    EXPECT_EQ(typeid(0.f), typeid(0));
+}
+
 int main(int argc, const char* argv[]) {
     return static_cast<int>(RUN_STESTS(argc, argv));
 }
