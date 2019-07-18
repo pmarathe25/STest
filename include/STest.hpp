@@ -64,4 +64,9 @@ namespace Stealth::Test {
     Status runTests(int argc, const char* argv[], const std::string& filename);
 
     #define RUN_STESTS(argc, argv) Stealth::Test::runTests(argc, argv, __FILE__)
+
+    #define STEST_MAIN() \
+        int main(int argc, const char* argv[]) { \
+            return static_cast<int>(RUN_STESTS(argc, argv)); \
+        }
 } // Stealth::Test
