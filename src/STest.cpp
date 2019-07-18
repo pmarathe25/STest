@@ -36,12 +36,14 @@ namespace Stealth::Test {
             // Run and time the test.
             try {
                 auto startTime = std::chrono::steady_clock::now();
-                test(passed);
+                test();
                 auto endTime = std::chrono::steady_clock::now();
                 ms = std::chrono::duration_cast<std::chrono::nanoseconds>(endTime - startTime).count() / 1.0e6f;
                 totalMs += ms;
             } catch (const std::exception& e) {
                 std::cout << "\033[1;31m[ EXCEPTION] " << name << "\n\t" << e.what() << "\033[0m\n";
+                passed = false;
+            } catch (const TestFailedException&) {
                 passed = false;
             }
             // Show test results.

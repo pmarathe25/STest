@@ -3,6 +3,7 @@ Dates are in YYYY-MM-DD format.
 
 ## vNext ()
 - Leverages `SLog`'s `operator<<` overloads to enable displaying better errors.
+- `EXPECT_*` macros now throw a `TestFailedException` to indicate that a failure occurred.
 
 ## v0.2.0 (2019-07-15)
 - Adds `EXPECT_THROWS` and `EXPECT_THROWS_ANY` to check for exceptions.

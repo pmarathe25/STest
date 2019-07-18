@@ -30,6 +30,11 @@ STEST(PassExpectThrows) {
     EXPECT_THROWS(throw std::runtime_error{""}, std::runtime_error);
 }
 
+STEST(PassExpectThrowsTwice) {
+    EXPECT_THROWS(throw std::runtime_error{""}, std::runtime_error);
+    EXPECT_THROWS(throw std::runtime_error{""}, std::runtime_error);
+}
+
 STEST(PassExpectThrowsAny) {
     EXPECT_THROWS_ANY(throw std::runtime_error{""});
 }
@@ -48,6 +53,38 @@ STEST(PassCanCompareTypeIDs) {
 
 STEST(FailCanCompareTypeIDs) {
     EXPECT_EQ(typeid(0.f), typeid(0));
+}
+
+void helperPass() {
+    EXPECT_EQ(0, 0);
+}
+
+STEST(PassCanUseHelper) {
+    helperPass();
+}
+
+void helperFail() {
+    EXPECT_EQ(1, 0);
+}
+
+STEST(FailCanUseHelper) {
+    helperFail();
+}
+
+void helperThrowsPass() {
+    EXPECT_THROWS(throw std::runtime_error{""}, std::runtime_error);
+}
+
+STEST(PassCanUseHelperThrows) {
+    helperThrowsPass();
+}
+
+void helperThrowsFail() {
+    EXPECT_THROWS(throw std::runtime_error{""}, std::bad_alloc);
+}
+
+STEST(FailCanUseHelperThrows) {
+    helperThrowsFail();
 }
 
 int main(int argc, const char* argv[]) {
