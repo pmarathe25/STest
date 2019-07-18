@@ -30,7 +30,7 @@ namespace Stealth::Test {
                 std::bind(&_stest_derived_##FIXTURE_CLASS##_##NAME##_class::__stest_run_func, \
                     &_stest_derived_##FIXTURE_CLASS##_##NAME##_instance), __FILE__ ":" #NAME); \
         } \
-        void ::_stest_derived_##FIXTURE_CLASS##_##NAME##_class::__stest_run_func()
+        void _stest_derived_##FIXTURE_CLASS##_##NAME##_class::__stest_run_func()
 
     // Checks
     #define _LOG_STEST_ERROR(MESSAGE) std::cerr << "\033[1;31m[     ERROR]\n\t" << MESSAGE << "\033[0m" << std::endl

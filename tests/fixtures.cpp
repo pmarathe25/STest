@@ -11,6 +11,15 @@ STEST_F(TestFixture, ValuesInitialized) {
     EXPECT_EQ(c, 0);
 }
 
+namespace testNamespace {
+    STEST_F(TestFixture, NamespaceValuesInitialized) {
+        EXPECT_EQ(a, 0);
+        EXPECT_EQ(b, 0);
+        EXPECT_EQ(c, 0);
+    }
+} // testNamespace
+
+
 STEST_F(TestFixture, CanModifyValues) {
     a = 1;
     EXPECT_EQ(a, 1);
