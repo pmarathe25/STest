@@ -4,16 +4,16 @@
 #include <chrono>
 #include <string>
 #include <vector>
-#include <map>
 
 namespace Stealth::Test {
     // Keep track of all tests.
-    static std::map<const std::string, const TestFunc> G_TESTS{};
+    // TODO: Make this a vector of pairs to allow duplicate test names (in different namespaces for example).
+    static std::vector<std::pair<const std::string, const TestFunc>> G_TESTS{};
 
     // Must have a return type so that we can invoke this in the global scope.
     // The side-effect of this function is to register the test.
     bool addTest(TestFunc func, const std::string& name) {
-        G_TESTS.emplace(name, std::move(func));
+        G_TESTS.emplace_back(name, std::move(func));
         return true;
     }
 

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef STEST_HPP
+#define STEST_HPP
 #include <Stealth/SLog.hpp>
 #include <functional>
 #include <iostream>
@@ -70,3 +71,5 @@ namespace Stealth::Test {
             return static_cast<int>(RUN_STESTS(argc, argv)); \
         }
 } // Stealth::Test
+
+#endif // include guard
