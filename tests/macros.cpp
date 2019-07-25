@@ -1,4 +1,4 @@
-#include "STest.hpp"
+#include "STest/include/STest.hpp"
 
 STEST(FailExpectTrue) {
     EXPECT_TRUE(false);
