@@ -1,4 +1,4 @@
-#include "STest.hpp"
+#include "STest/include/STest.hpp"
 
 STEST(FailExpectTrue) {
     EXPECT_TRUE(false);
@@ -30,6 +30,11 @@ STEST(PassExpectThrows) {
     EXPECT_THROWS(throw std::runtime_error{""}, std::runtime_error);
 }
 
+STEST(PassExpectThrowsTwice) {
+    EXPECT_THROWS(throw std::runtime_error{""}, std::runtime_error);
+    EXPECT_THROWS(throw std::runtime_error{""}, std::runtime_error);
+}
+
 STEST(PassExpectThrowsAny) {
     EXPECT_THROWS_ANY(throw std::runtime_error{""});
 }
@@ -42,6 +47,44 @@ STEST(FailExpectThrowsAny) {
     EXPECT_THROWS_ANY(0);
 }
 
-int main(int argc, const char* argv[]) {
-    return static_cast<int>(RUN_STESTS(argc, argv));
+STEST(PassCanCompareTypeIDs) {
+    EXPECT_EQ(typeid(0), typeid(0));
 }
+
+STEST(FailCanCompareTypeIDs) {
+    EXPECT_EQ(typeid(0.f), typeid(0));
+}
+
+void helperPass() {
+    EXPECT_EQ(0, 0);
+}
+
+STEST(PassCanUseHelper) {
+    helperPass();
+}
+
+void helperFail() {
+    EXPECT_EQ(1, 0);
+}
+
+STEST(FailCanUseHelper) {
+    helperFail();
+}
+
+void helperThrowsPass() {
+    EXPECT_THROWS(throw std::runtime_error{""}, std::runtime_error);
+}
+
+STEST(PassCanUseHelperThrows) {
+    helperThrowsPass();
+}
+
+void helperThrowsFail() {
+    EXPECT_THROWS(throw std::runtime_error{""}, std::bad_alloc);
+}
+
+STEST(FailCanUseHelperThrows) {
+    helperThrowsFail();
+}
+
+STEST_MAIN();

@@ -1,4 +1,4 @@
-#include "STest.hpp"
+#include "STest/include/STest.hpp"
 
 class TestFixture {
 protected:
@@ -11,6 +11,15 @@ STEST_F(TestFixture, ValuesInitialized) {
     EXPECT_EQ(c, 0);
 }
 
+namespace testNamespace {
+    STEST_F(TestFixture, NamespaceValuesInitialized) {
+        EXPECT_EQ(a, 0);
+        EXPECT_EQ(b, 0);
+        EXPECT_EQ(c, 0);
+    }
+} // testNamespace
+
+
 STEST_F(TestFixture, CanModifyValues) {
     a = 1;
     EXPECT_EQ(a, 1);
@@ -20,6 +29,4 @@ STEST_F(TestFixture, CanModifyValues) {
     EXPECT_EQ(c, 3);
 }
 
-int main(int argc, const char* argv[]) {
-    return static_cast<int>(RUN_STESTS(argc, argv));
-}
+STEST_MAIN();

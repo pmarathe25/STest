@@ -1,6 +1,13 @@
 # STest Changelog
 Dates are in YYYY-MM-DD format.
 
+## v0.3.0 (2019-07-24)
+- Leverages `SLog`'s `operator<<` overloads to enable displaying better errors.
+- `EXPECT_*` macros now throw a `TestFailedException` to indicate that a failure occurred. This allows them to be used in helper functions as well.
+- Adds `STEST_MAIN` macro to save on boiler plate.
+- Enables tests with duplicate names (must be in different namespaces).
+- Updates `SLog` dependency so no library is required (header-only).
+
 ## v0.2.0 (2019-07-15)
 - Adds `EXPECT_THROWS` and `EXPECT_THROWS_ANY` to check for exceptions.
 
