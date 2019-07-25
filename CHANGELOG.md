@@ -1,6 +1,9 @@
 # STest Changelog
 Dates are in YYYY-MM-DD format.
 
+## vNext ()
+- Test output does not display `PASSED` if no tests passed, or `FAILED` if no tests failed.
+
 ## v0.3.0 (2019-07-24)
 - Leverages `SLog`'s `operator<<` overloads to enable displaying better errors.
 - `EXPECT_*` macros now throw a `TestFailedException` to indicate that a failure occurred. This allows them to be used in helper functions as well.

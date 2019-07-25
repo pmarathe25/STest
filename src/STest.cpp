@@ -58,8 +58,12 @@ namespace Stealth::Test {
         }
         // Print overall stats.
         std::cout << "\n[==========] Ran " << pluralize("test", G_TESTS.size()) << " (" << totalMs << " ms)\n";
-        std::cout << "\033[1;92m[  PASSED  ] " << pluralize("test", numPassed) << "\033[0m\n";
-        std::cout << "\033[1;31m[  FAILED  ] " << pluralize("test", failed.size()) << "\033[0m\n";
+        if (numPassed) {
+            std::cout << "\033[1;92m[  PASSED  ] " << pluralize("test", numPassed) << "\033[0m\n";
+        }
+        if (!failed.empty()) {
+            std::cout << "\033[1;31m[  FAILED  ] " << pluralize("test", failed.size()) << "\033[0m\n";
+        }
         for (const std::string& fail : failed) {
             std::cout << "\033[1;31m[  FAILED  ]\t" << fail << "\033[0m\n";
         }
