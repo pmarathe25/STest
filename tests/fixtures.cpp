@@ -29,4 +29,20 @@ STEST_F(TestFixture, CanModifyValues) {
     EXPECT_EQ(c, 3);
 }
 
+// Check that we can use fixtures defined in other namespaces.
+namespace fixns {
+    class TestFixtureNS {
+    protected:
+        int a{0}, b{0}, c{0};
+    };
+} // fixns
+
+using fixns::TestFixtureNS;
+
+STEST_F(TestFixtureNS, CanAccessFixtureDefinedInNamespace) {
+    EXPECT_EQ(a, 0);
+    EXPECT_EQ(b, 0);
+    EXPECT_EQ(c, 0);
+}
+
 STEST_MAIN();
