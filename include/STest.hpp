@@ -1,6 +1,6 @@
 #ifndef STEST_HPP
 #define STEST_HPP
-#include <Stealth/SLog.hpp>
+#include <SLog.hpp>
 #include <functional>
 #include <iostream>
 #include <typeinfo>
@@ -23,15 +23,15 @@ namespace Stealth::Test {
     // Fixtures
     #define STEST_F(FIXTURE_CLASS, NAME) \
         namespace { \
-            class _stest_derived_##FIXTURE_CLASS##_##NAME##_class : public FIXTURE_CLASS { \
+            class FIXTURE_CLASS##_stest_derived_##NAME##_class : public FIXTURE_CLASS { \
             public: \
                 void __stest_run_func(); \
-            } _stest_derived_##FIXTURE_CLASS##_##NAME##_instance; \
+            } FIXTURE_CLASS##_stest_derived_##NAME##_instance; \
             [[maybe_unused]] const bool _ST_Func_Result_##NAME##_##discard = Stealth::Test::addTest( \
-                std::bind(&_stest_derived_##FIXTURE_CLASS##_##NAME##_class::__stest_run_func, \
-                    &_stest_derived_##FIXTURE_CLASS##_##NAME##_instance), __FILE__ ":" #NAME); \
+                std::bind(&FIXTURE_CLASS##_stest_derived_##NAME##_class::__stest_run_func, \
+                    &FIXTURE_CLASS##_stest_derived_##NAME##_instance), __FILE__ ":" #NAME); \
         } \
-        void _stest_derived_##FIXTURE_CLASS##_##NAME##_class::__stest_run_func()
+        void FIXTURE_CLASS##_stest_derived_##NAME##_class::__stest_run_func()
 
     // Checks
     #define _LOG_STEST_ERROR(MESSAGE) std::cerr << "\033[1;31m[     ERROR]\n\t" << MESSAGE << "\033[0m" << std::endl
@@ -41,7 +41,8 @@ namespace Stealth::Test {
     #define EXPECT_TRUE(CONDITION) EXPECT_EQ(CONDITION, true)
     #define EXPECT_FALSE(CONDITION) EXPECT_EQ(CONDITION, false)
 
-    #define EXPECT_THROWS(STATEMENT, EXCEPTION_TYPE) { \
+    #define EXPECT_THROWS(STATEMENT, EXCEPTION_TYPE) \
+        { \
             bool __stest_exception_caught{false}; \
             try { \
                 STATEMENT; \
