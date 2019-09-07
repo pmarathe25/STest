@@ -8,7 +8,6 @@
 
 namespace Stealth::Test {
     // Keep track of all tests.
-    // TODO: Make this a vector of pairs to allow duplicate test names (in different namespaces for example).
     static std::vector<std::pair<const std::string, const TestFunc>> G_TESTS{};
 
     // Must have a return type so that we can invoke this in the global scope.
