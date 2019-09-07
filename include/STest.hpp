@@ -1,6 +1,6 @@
 #ifndef STEST_HPP
 #define STEST_HPP
-#include <Stealth/SLog.hpp>
+#include <SLog.hpp>
 #include <functional>
 #include <iostream>
 #include <typeinfo>

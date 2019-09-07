@@ -1,8 +1,9 @@
 # STest Changelog
 Dates are in YYYY-MM-DD format.
 
-## vNext ()
+## v0.3.1 (2019-09-07)
 - Test output does not display `PASSED` if no tests passed, or `FAILED` if no tests failed.
+- Updates build system. 
 
 ## v0.3.0 (2019-07-24)
 - Leverages `SLog`'s `operator<<` overloads to enable displaying better errors.
