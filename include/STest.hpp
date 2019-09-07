@@ -45,7 +45,7 @@ namespace Stealth::Test {
         { \
             bool __stest_exception_caught{false}; \
             try { \
-                STATEMENT; \
+                (void) (STATEMENT); \
                 _LOG_STEST_ERROR("Expected exception of type: " << #EXCEPTION_TYPE << ", but no exception was thrown"); \
             } catch (const EXCEPTION_TYPE& __stest_exception) { \
                 __stest_exception_caught = true; \
@@ -55,7 +55,14 @@ namespace Stealth::Test {
             if (!__stest_exception_caught) { throw Stealth::Test::TestFailedException{}; } \
         }
 
-    #define EXPECT_THROWS_ANY(STATEMENT) EXPECT_THROWS(STATEMENT, std::exception)
+    #define EXPECT_THROWS_ANY(STATEMENT) \
+        { \
+            try { \
+                (void) (STATEMENT); \
+                _LOG_STEST_ERROR("Expected exception, but no exception was thrown"); \
+                throw Stealth::Test::TestFailedException{}; \
+            } catch (const std::exception& __stest_exception) { } \
+        }
 
     // Running tests
     enum class Status : int {
