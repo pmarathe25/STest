@@ -87,4 +87,20 @@ STEST(FailCanUseHelperThrows) {
     helperThrowsFail();
 }
 
+struct DefinitelyNotStreamable {
+    constexpr bool operator==(const DefinitelyNotStreamable& other) const {
+        return mVal == other.mVal;
+    }
+
+    int mVal{0};
+};
+
+STEST(PassCanDisplayCustomType) {
+    EXPECT_EQ(DefinitelyNotStreamable{}, DefinitelyNotStreamable{});
+}
+
+STEST(FailCanDisplayCustomType) {
+    EXPECT_EQ(DefinitelyNotStreamable{1}, DefinitelyNotStreamable{0});
+}
+
 STEST_MAIN();

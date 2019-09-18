@@ -1,6 +1,9 @@
 # STest Changelog
 Dates are in YYYY-MM-DD format.
 
+## v0.3.3 (2019-09-17)
+- Adds a fallback `operator<<` for those types which do not provide one themselves.
+
 ## v0.3.2 (2019-09-07)
 - Reworks `EXPECT_THROWS` and `EXPECT_THROWS_ANY` so that they no longer trigger compiler warnings.
 
